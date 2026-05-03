@@ -1,6 +1,28 @@
 import { useEffect, useState } from 'react'
+import { FiDownload, FiFileText, FiPlus } from 'react-icons/fi'
 import api from '../services/api'
-export default function MaterialsPage(){const [materials,setMaterials]=useState([]);const [payload,setPayload]=useState({title:'',subject:'',uploaded_by:1,file:null});
-const load=async()=>{const {data}=await api.get('/materials');setMaterials(data)};useEffect(()=>{load()},[])
-const submit=async(e)=>{e.preventDefault();const fd=new FormData();Object.entries(payload).forEach(([k,v])=>fd.append(k,v));await api.post('/materials',fd);load()}
-return <div><h2 className='text-2xl font-semibold mb-4'>Study Materials</h2><form onSubmit={submit} className='card grid md:grid-cols-4 gap-2 mb-4'><input required className='border p-2 rounded' placeholder='Title' onChange={e=>setPayload({...payload,title:e.target.value})}/><input required className='border p-2 rounded' placeholder='Subject' onChange={e=>setPayload({...payload,subject:e.target.value})}/><input required type='file' accept='.pdf' className='border p-2 rounded' onChange={e=>setPayload({...payload,file:e.target.files[0]})}/><button className='bg-blue-500 text-white rounded p-2'>Upload PDF</button></form><div className='grid md:grid-cols-2 gap-4'>{materials.map(m=><div className='card' key={m.id}><h3 className='font-semibold'>{m.title}</h3><p>{m.subject}</p><a href={`http://localhost:8000/materials/${m.id}/download`} className='text-blue-600'>Download</a></div>)}</div></div>}
+import Card from '../components/Card'
+
+export default function MaterialsPage() {
+  const [materials, setMaterials] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  const load = async () => {
+    setLoading(true)
+    const { data } = await api.get('/materials')
+    setMaterials(data)
+    setLoading(false)
+  }
+
+  useEffect(() => { load() }, [])
+
+  return (
+    <div className='space-y-5'>
+      <div className='flex items-center justify-between'>
+        <h2 className='text-2xl font-semibold'>Study Materials</h2>
+        <button className='inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 text-sm text-white'><FiPlus /> Upload Material</button>
+      </div>
+      {loading ? <div className='grid gap-4 md:grid-cols-2'>{[...Array(4)].map((_, i) => <div key={i} className='h-40 animate-pulse rounded-xl bg-slate-200' />)}</div> : materials.length === 0 ? <Card hover={false} className='p-8 text-center text-slate-500'>No results found.</Card> : <div className='grid gap-4 md:grid-cols-2 xl:grid-cols-3'>{materials.map((m) => <Card key={m.id} className='space-y-3'><div className='flex items-center gap-2 text-indigo-600'><FiFileText /><span className='text-xs font-medium'>PDF</span></div><h3 className='font-semibold'>{m.title}</h3><p className='text-sm text-slate-500'>{m.subject}</p><div className='flex items-center justify-between'><span className='text-sm text-amber-500'>★ 4.6</span><a href={`http://localhost:8000/materials/${m.id}/download`} className='inline-flex items-center gap-1 rounded-lg bg-slate-100 px-3 py-1.5 text-sm'><FiDownload />Download</a></div></Card>)}</div>}
+    </div>
+  )
+}
