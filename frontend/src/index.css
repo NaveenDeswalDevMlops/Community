@@ -5,20 +5,3 @@
 body {
   @apply bg-[#F9FAFB] text-slate-800 antialiased;
 }
-
-.image-marquee {
-  overflow: hidden;
-  width: 100%;
-}
-
-.image-track {
-  display: flex;
-  gap: 1rem;
-  width: max-content;
-  animation: slide-left 22s linear infinite;
-}
-
-@keyframes slide-left {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
