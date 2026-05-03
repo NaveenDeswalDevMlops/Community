@@ -1,35 +1,6 @@
 import { useState } from 'react'
-import { FiLock, FiMail } from 'react-icons/fi'
-import Card from '../components/Card'
 
 export default function AdminLoginPage() {
   const [form, setForm] = useState({ email: '', password: '' })
-
-  const submit = (e) => {
-    e.preventDefault()
-    alert('Admin authentication will be connected to backend securely.')
-  }
-
-  return (
-    <div className='mx-auto max-w-md py-10'>
-      <Card hover={false} className='space-y-4 rounded-2xl p-6 shadow-md'>
-        <div className='text-center'>
-          <img src='https://www.bits-pilani.ac.in/wp-content/themes/bits/assets/images/bitspilani-logo.png' alt='BITS Pilani' className='mx-auto mb-3 h-14 object-contain' />
-          <h2 className='text-2xl font-semibold text-slate-900'>Admin Login</h2>
-          <p className='text-sm text-slate-500'>Manage books, jobs, and materials from one secure dashboard.</p>
-        </div>
-        <form onSubmit={submit} className='space-y-3'>
-          <label className='flex items-center gap-2 rounded-xl border border-slate-200 px-3 py-2'>
-            <FiMail className='text-slate-400' />
-            <input type='email' required placeholder='Admin email' className='w-full outline-none' value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-          </label>
-          <label className='flex items-center gap-2 rounded-xl border border-slate-200 px-3 py-2'>
-            <FiLock className='text-slate-400' />
-            <input type='password' required placeholder='Password' className='w-full outline-none' value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
-          </label>
-          <button className='w-full rounded-xl bg-indigo-600 py-2 text-white'>Sign in as Admin</button>
-        </form>
-      </Card>
-    </div>
-  )
+  return <section className='flex min-h-[70vh] items-center justify-center px-6 py-20'><div className='w-full max-w-md rounded-2xl bg-white p-8 shadow-lg'><img src='https://www.bits-pilani.ac.in/wp-content/themes/bits/assets/images/bitspilani-logo.png' alt='BITS Pilani' className='mx-auto mb-4 h-14' /><h1 className='text-center text-3xl font-bold'>Admin Login</h1><p className='mb-6 mt-2 text-center text-sm text-slate-500'>Secure panel for campus moderators.</p><form className='space-y-4'><input className='w-full rounded-xl border border-slate-200 p-3' placeholder='Email' value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} /><input type='password' className='w-full rounded-xl border border-slate-200 p-3' placeholder='Password' value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} /><button className='w-full rounded-xl bg-indigo-600 py-3 font-semibold text-white'>Sign In</button></form></div></section>
 }
