@@ -12,6 +12,7 @@ export default function Sidebar() {
   return (
     <aside className='sticky top-0 flex min-h-screen w-72 flex-col justify-between border-r border-slate-200 bg-white p-5'>
       <div>
+        <img src='https://www.bits-pilani.ac.in/wp-content/themes/bits/assets/images/bitspilani-logo.png' alt='BITS Pilani' className='mb-3 h-12 object-contain' />
         <h1 className='mb-8 text-2xl font-bold text-indigo-600'>CampusHub</h1>
         <nav className='space-y-1'>
           {links.map(({ to, label, icon: Icon }) => (
