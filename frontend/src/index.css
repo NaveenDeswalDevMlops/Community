@@ -2,6 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #0f172a;
+  background-color: #f9fafb;
+}
+
 body {
-  @apply bg-[#F9FAFB] text-slate-800 antialiased;
+  @apply m-0 bg-[#F9FAFB] text-slate-800 antialiased;
+}
+
+* {
+  @apply box-border;
+}
+
+.marquee-track {
+  animation: marquee-slide 30s linear infinite;
+}
+
+@keyframes marquee-slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }

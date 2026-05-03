@@ -1,2 +1,8 @@
 import axios from 'axios'
-export default axios.create({ baseURL: 'http://localhost:8000' })
+
+const api = axios.create({
+  baseURL: 'http://localhost:8000',
+  timeout: 10000,
+})
+
+export default api
