@@ -9,18 +9,31 @@ const stats = [
   { label: 'Referrals', value: 8, icon: FiUsers, gradient: 'from-emerald-500 to-teal-500' },
 ]
 
+const campusImages = [
+  'https://www.bits-pilani.ac.in/wp-content/uploads/2023/08/BITS_Pilani_Main-Building.jpg',
+  'https://www.bits-pilani.ac.in/wp-content/uploads/2023/08/BITS_Hyderabad_Campus.jpg',
+  'https://www.bits-pilani.ac.in/wp-content/uploads/2023/08/BITS_Goa_Campus.jpg',
+  'https://www.bits-pilani.ac.in/wp-content/uploads/2023/08/BITS_Dubai_Campus.jpg',
+]
+
 export default function Dashboard() {
   return (
     <div className='space-y-6'>
-      <section className='relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-700 via-indigo-600 to-violet-600 p-6 text-white shadow-lg'>
-        <img src='https://www.bits-pilani.ac.in/wp-content/uploads/2023/08/BITS_Pilani_Main-Building.jpg' alt='BITS Campus' className='absolute inset-0 h-full w-full object-cover opacity-20' />
-        <div className='relative z-10 flex flex-col gap-4 md:flex-row md:items-center md:justify-between'>
+      <section className='rounded-3xl bg-white p-6 shadow-sm'>
+        <div className='mb-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between'>
           <div>
-            <p className='text-sm text-indigo-100'>BITS Pilani Student Network</p>
-            <h2 className='text-3xl font-bold'>Welcome back to CampusHub</h2>
-            <p className='mt-1 text-indigo-100'>Discover books, trusted referrals, and curated study materials in one place.</p>
+            <p className='text-sm font-medium text-indigo-600'>Inspired by modern university template styling</p>
+            <h2 className='text-3xl font-bold text-slate-900'>Explore your BITS network on CampusHub</h2>
+            <p className='mt-1 text-slate-600'>Find books, internship referrals, and shared resources in a beautifully organized dashboard.</p>
           </div>
-          <button className='inline-flex items-center gap-2 self-start rounded-xl bg-white/15 px-4 py-2 text-sm font-medium backdrop-blur hover:bg-white/25'>Explore Opportunities <FiArrowRight /></button>
+          <button className='inline-flex items-center gap-2 self-start rounded-xl bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700'>Get Started <FiArrowRight /></button>
+        </div>
+        <div className='image-marquee'>
+          <div className='image-track'>
+            {[...campusImages, ...campusImages].map((src, i) => (
+              <img key={`${src}-${i}`} src={src} alt='BITS campus' className='h-40 w-72 rounded-2xl object-cover shadow-md' />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -36,15 +49,6 @@ export default function Dashboard() {
           </motion.div>
         ))}
       </div>
-
-      <Card>
-        <h3 className='mb-3 text-lg font-semibold'>Recent Activity</h3>
-        <ul className='space-y-2 text-sm text-slate-600'>
-          <li className='rounded-lg bg-slate-50 px-3 py-2'>📘 New data science book listed in Bangalore.</li>
-          <li className='rounded-lg bg-slate-50 px-3 py-2'>📄 OS question bank uploaded by Priya.</li>
-          <li className='rounded-lg bg-slate-50 px-3 py-2'>💼 Internship posted at Acme Labs with referral support.</li>
-        </ul>
-      </Card>
     </div>
   )
 }
